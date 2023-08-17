@@ -21,10 +21,10 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     password = Column(String, unique=False, nullable=False)
 
-    leagues = relationship("League",
+    leagues = relationship("User",
                            secondary=user_league,
                            order_by="(League.league_id)",
-                           back_populates="users")
+                           backref="users")
 
 
 class League(Base):
@@ -36,7 +36,7 @@ class League(Base):
     users = relationship("League",
                          secondary=user_league,
                          order_by="(User.user_id)",
-                         back_populates="leagues")
+                         backref="leagues")
 
 
 class Team(Base):
