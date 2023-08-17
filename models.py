@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, ForeignKey
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship, declarative_base, validates
+import re
 
 # Base is called an Abstract Base Class - Our SQL Alchemy models will inherit from this class
 Base = declarative_base()
@@ -25,7 +26,23 @@ class User(Base):
                            secondary=user_league,
                            order_by="(League.league_id)",
                            backref="users")
+    @validates("email_address")
+    def validate_email(self, key, address):
+        pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        if not re.fullmatch(pattern, address):
+            raise ValueError("Invalid email address")
+        if key != "email_address":
+            raise ValueError("Key must be 'email'")
+        return address
 
+    @validates("password")
+    def validate_password(self, key, password):
+        pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        if not re.fullmatch(pattern, password):
+            raise ValueError("Invalid password")
+        if key != "password":
+            raise ValueError("Key must be 'password'")
+        return password
 
 class League(Base):
     __tablename__ = "league"
