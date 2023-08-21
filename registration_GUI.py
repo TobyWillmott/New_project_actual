@@ -1,8 +1,6 @@
-
 import tkinter as tk
-
-
 from controller import Controller
+import tkinter.ttk as ttk
 
 
 class Registration(tk.Frame):
@@ -66,7 +64,8 @@ class Registration(tk.Frame):
         """
         try:
             if self.controller:
-                clicked = self.controller.save(self.first_name_var.get(), self.second_name_var.get(), self.username_var.get(), self.password_var.get())
+                clicked = self.controller.save(self.first_name_var.get(), self.second_name_var.get(),
+                                               self.username_var.get(), self.password_var.get())
                 self.show_success(clicked)
 
         except ValueError as error:
@@ -98,6 +97,8 @@ class Registration(tk.Frame):
         self.username_entry['foreground'] = 'black'
         self.username_var.set('')
         self.password_var.set('')
+        self.first_name_var.set('')
+        self.second_name_var.set('')
 
     def hide_message(self):
         """

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, ForeignKey
+from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, ForeignKey, Date, Time, DateTime
 from sqlalchemy.orm import relationship, declarative_base, validates
 import re
 
@@ -26,6 +26,7 @@ class User(Base):
                            secondary=user_league,
                            order_by="(League.league_id)",
                            backref="users")
+
     @validates("email_address")
     def validate_email(self, key, address):
         pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -44,10 +45,11 @@ class User(Base):
             raise ValueError("Key must be 'password'")
         return password
 
+
 class League(Base):
     __tablename__ = "league"
     league_id = Column(Integer, primary_key=True, autoincrement=True)
-    start_gameweek = Column(Integer, unique=False, nullable=False)
+    gameweek_id = Column(Integer, ForeignKey("gameweek.gameweek_id"), nullable=False)
     league_name = Column(String, unique=False, nullable=False)
 
     users = relationship("League",
@@ -65,10 +67,17 @@ class Team(Base):
 class Selection(Base):
     __tablename__ = "selection"
     selection_id = Column(Integer, primary_key=True, autoincrement=True)
-    gameweek = Column(Integer, unique=False, nullable=False)
+    gameweek_id = Column(Integer, ForeignKey("gameweek.gameweek_id"), nullable=False)
     outcome = Column(String, unique=False, nullable=False)
     user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False)
     team_id = Column(Integer, ForeignKey("team.team_id"), nullable=False)
     league_id = Column(Integer, ForeignKey("league.league_id"), nullable=False)
 
 
+class Gameweek(Base):
+    __tablename__ = "gameweek"
+    gameweek_id = Column(Integer, primary_key=True, autoincrement=True)
+    start_date = Column(Date, unique=False, nullable=False)
+    start_time = Column(Time, unique=False, nullable=False)
+    end_date = Column(Date, unique=False, nullable=False)
+    end_time = Column(Time, unique=False, nullable=False)
