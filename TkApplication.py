@@ -35,27 +35,7 @@ class TkApplication(tk.Tk):
         frame_to_show = self.frames[current_frame]
         frame_to_show.pack(expand=True, fill=tk.BOTH)
 
-    def save(self, first_name_, last_name_, username_, password_):
-        """
-        Save the email
-        :param password_:
-        :param first_name_:
-        :param username_:
-        :param last_name_:
-        :return:
-        """
-        try:
 
-            with Session(self.engine) as sess:
-                user = User(first_name=first_name_, last_name=last_name_, username=username_, password=password_)
-                sess.add(user)
-                sess.commit()
-
-                return f"It worked"
-
-        except ValueError as error:
-            # show an error message
-            raise ValueError(error)
 
 if __name__ == "__main__":
     app = TkApplication()
