@@ -1,6 +1,6 @@
 import tkinter as tk
 from controller import Controller
-
+from TkApplication import TkApplication
 class WelcomeScreen(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -16,7 +16,7 @@ class WelcomeScreen(tk.Frame):
         self.register_button.grid(row=2, column=1)
 
     def sign_in_clicked(self):
-        from tk_application import TkApplication
+        from TkApplication import TkApplication
         self.TkApplication.show_frame(sign_in_frame)
 
     def register_clicked(self):
