@@ -1,3 +1,6 @@
+from sqlalchemy import create_engine
+from models import Base
+
 from registration_GUI import Registration
 from welcome_GUI import WelcomeScreen
 from sign_in_GUI import SignIn
@@ -38,7 +41,12 @@ class TkApplication(tk.Tk):
 
 
 if __name__ == "__main__":
-    app = TkApplication()
-    app.mainloop()
+    # engine = create_engine("sqlite:///fantasy_football.db", echo=True)
+    # Base.metadata.create_all(engine)
+    
+    # app = TkApplication()
+    # app.mainloop()
+    from api import main
+    main()
 
 

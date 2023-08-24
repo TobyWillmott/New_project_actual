@@ -1,9 +1,10 @@
 import tkinter as tk
 from controller import Controller
-from TkApplication import TkApplication
+
 class WelcomeScreen(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
+        self.parent = parent
         self.welcome_label = tk.Label(self, text="Username:")
         self.sign_in_button = tk.Button(self, text="Sign in", command=self.sign_in_clicked)
         self.register_button = tk.Button(self, text="Register", command=self.register_clicked)
@@ -16,11 +17,10 @@ class WelcomeScreen(tk.Frame):
         self.register_button.grid(row=2, column=1)
 
     def sign_in_clicked(self):
-        from TkApplication import TkApplication
-        self.TkApplication.show_frame(sign_in_frame)
+        self.parent.show_frame("sign_in_frame")
 
     def register_clicked(self):
-        pass
+        self.parent.show_frame("registration_screen")
 
     def set_controller(self, controller):
         self.controller = controller
