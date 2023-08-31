@@ -1,17 +1,17 @@
-from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, ForeignKey, Date, Time, DateTime
+from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, ForeignKey, DateTime
 from sqlalchemy.orm import relationship, declarative_base, validates
 import re
 
 # Base is called an Abstract Base Class - Our SQL Alchemy models will inherit from this class
 Base = declarative_base()
 
-user_league = Table("user_league",
-                    Base.metadata,
-                    Column("user_league_id", Integer, primary_key=True),
-                    Column("user_id", ForeignKey("user.user_id")),
-                    Column("league_id", ForeignKey("league.league_id")),
-                    UniqueConstraint("user_id", "league_id")
-                    )
+#user_league = Table("user_league",
+#                   Base.metadata,
+#                    Column("user_league_id", Integer, primary_key=True),
+#                    Column("user_id", ForeignKey("user.user_id")),
+#                    Column("league_id", ForeignKey("league.league_id")),
+#                    UniqueConstraint("user_id", "league_id")
+#                   )
 
 
 class User(Base):
@@ -22,10 +22,10 @@ class User(Base):
     username = Column(String, unique=True, nullable=False)
     password = Column(String, unique=False, nullable=False)
 
-    leagues = relationship("User",
-                           secondary=user_league,
-                           order_by="(League.league_id)",
-                           backref="users")
+    #leagues = relationship("User",
+    #                       secondary=user_league,
+    #                       order_by="(League.league_id)",
+    #                       backref="users")
 
     @validates("email_address")
     def validate_email(self, key, address):
@@ -51,13 +51,16 @@ class League(Base):
     league_id = Column(Integer, primary_key=True, autoincrement=True)
     gameweek_id = Column(Integer, ForeignKey("gameweek.gameweek_id"), nullable=False)
     league_name = Column(String, unique=False, nullable=False)
-
-    users = relationship("League",
-                         secondary=user_league,
-                         order_by="(User.user_id)",
-                         backref="leagues")
-
-
+    #users = relationship("League",
+    #                     secondary=user_league,
+    #                     order_by="(User.user_id)",
+    #                     backref="leagues")
+class UserLeague(Base):
+    __tablename__ = "user_league"
+    user_league_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False)
+    league_id = Column(Integer, ForeignKey("league.league_id"), nullable=False)
+    __table_args__ = (UniqueConstraint('user_id', 'league_id', name='user_league_uc'),)
 class Team(Base):
     __tablename__ = "team"
     team_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -77,7 +80,5 @@ class Selection(Base):
 class Gameweek(Base):
     __tablename__ = "gameweek"
     gameweek_id = Column(Integer, primary_key=True, autoincrement=True)
-    start_date = Column(Date, unique=False, nullable=False)
-    start_time = Column(Time, unique=False, nullable=False)
-    end_date = Column(Date, unique=False, nullable=False)
-    end_time = Column(Time, unique=False, nullable=False)
+    start_date = Column(DateTime, unique=False, nullable=False)
+

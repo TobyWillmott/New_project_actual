@@ -1,13 +1,11 @@
 import tkinter as tk
-from controller import Controller
-import tkinter.ttk as ttk
-
 
 class Registration(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
 
         # create widgets
+        self.controller = parent
         self.label_first_name = tk.Label(self, text="First Name:")
         self.label_first_name.grid(row=1, column=0)
 
@@ -46,16 +44,11 @@ class Registration(tk.Frame):
         self.message_label = tk.Label(self, text='', foreground='red')
         self.message_label.grid(row=3, column=1, sticky=tk.W)
 
+        self.back_button = tk.Button(self, text="Back", command=self.back_clicked)
+        self.back_button.grid(row=0, column=0)
         # set the controller
-        self.controller = None
 
-    def set_controller(self, controller):
-        """
-        Set the controller
-        :param controller:
-        :return:
-        """
-        self.controller = controller
+
 
     def save_button_clicked(self):
         """
@@ -64,13 +57,17 @@ class Registration(tk.Frame):
         """
         try:
             if self.controller:
-                clicked = self.controller.save(self.first_name_var.get(), self.second_name_var.get(),
+                clicked = self.controller.add_user(self.first_name_var.get(), self.second_name_var.get(),
                                                self.username_var.get(), self.password_var.get())
-                self.show_success(clicked)
-
+                #self.show_success(clicked)
+                self.show_home_page()
         except ValueError as error:
             self.show_error(error)
 
+    def show_home_page(self):
+        self.user_list = self.controller.get_username_details(self.username_var.get())
+        id = self.user_list[0]
+        self.controller.show_home_page(id)
     def show_error(self, message):
         """
         Show an error message
@@ -111,24 +108,7 @@ class Registration(tk.Frame):
         self.password_entry["foreground"] = "black"
         self.username_entry["foreground"] = "black"
 
-
-class App(tk.Tk):
-    def __init__(self):
-        super().__init__()
-
-        self.title('Registration Screen')
-
-        # create a view and place it on the root window
-        view = Registration(self)
-        view.grid(row=0, column=0, padx=10, pady=10)
-
-        # create a controller
-        controller = Controller()
-
-        # set the controller to view
-        view.set_controller(controller)
+    def back_clicked(self):
+        self.controller.show_frame("welcome_frame")
 
 
-if __name__ == '__main__':
-    app = App()
-    app.mainloop()
