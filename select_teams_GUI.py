@@ -16,7 +16,7 @@ class SelectTeams(tk.Frame):
         self.current_gameweek_id.set(gameweek_id)
         self.start_gameweek = gameweek_id
         self.teams_buttons = [
-            tk.Button(self, bg="blue", text=f"{name}\n", fg="black", command=partial(self.choose_team, name), highlightbackground="black") for name in
+            tk.Button(self, bg="white", text=f"{name}\n", fg="black", command=partial(self.choose_team, name), highlightbackground="black") for name in
             self.teams]
         self.gameweek_label = tk.Label(self,
                                        text=f"The gameweek to choose a team for is {self.current_gameweek_id.get()}")
@@ -46,7 +46,7 @@ class SelectTeams(tk.Frame):
             if i[1] == name:
                 team_id = i[0]
         self.controller.add_selection(self.current_gameweek_id.get(), self.user_id, team_id, self.league_id)
-        self.teams_buttons[team_id - 1].configure(bg="green", text=f"{self.teams_id[team_id - 1][1]}\n{self.current_gameweek_id.get()}")
+        self.teams_buttons[team_id - 1].configure(bg="grey", text=f"{self.teams_id[team_id - 1][1]}\n{self.current_gameweek_id.get()}")
         current_num = self.current_gameweek_id.get()
         current_num += 1
         self.current_gameweek_id.set(current_num)
