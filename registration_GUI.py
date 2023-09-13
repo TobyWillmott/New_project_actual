@@ -109,6 +109,6 @@ class Registration(tk.Frame):
         self.username_entry["foreground"] = "black"
 
     def back_clicked(self):
-        self.controller.show_frame("welcome_frame")
+        self.controller.show_frame("sign_in_frame")
 
 

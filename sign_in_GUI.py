@@ -7,7 +7,6 @@ class SignIn(tk.Frame):
         self.controller = parent
         self.label_username = tk.Label(self, text="Username:")
         self.label_username.grid(row=3, column=0)
-
         self.label_password = tk.Label(self, text='Password: ')
         self.label_password.grid(row=4, column=0)
 
@@ -22,11 +21,8 @@ class SignIn(tk.Frame):
         self.enter_button = tk.Button(self, text='Enter', command=self.enter_button_clicked)
         self.enter_button.grid(row=4, column=3, padx=10)
 
-        self.back_button = tk.Button(self, text="Back", command=self.back_clicked)
-        self.back_button.grid(row=0, column=0)
-
-    def back_clicked(self):
-        self.controller.show_frame("welcome_frame")
+        self.register_button = tk.Button(self, text="No account? Create one", command=self.register_clicked)
+        self.register_button.grid(row=5, column=1)
 
     def enter_button_clicked(self):
         self.user_list = self.controller.get_username_details(self.username_var.get())
@@ -44,3 +40,6 @@ class SignIn(tk.Frame):
 
     def show_error(self):
         print("not a Valid_username")
+
+    def register_clicked(self):
+        self.controller.show_frame("register_frame")

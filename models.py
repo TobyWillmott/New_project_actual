@@ -61,6 +61,7 @@ class UserLeague(Base):
     user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False)
     league_id = Column(Integer, ForeignKey("league.league_id"), nullable=False)
     __table_args__ = (UniqueConstraint('user_id', 'league_id', name='user_league_uc'),)
+
 class Team(Base):
     __tablename__ = "team"
     team_id = Column(Integer, primary_key=True, autoincrement=True)
@@ -70,11 +71,11 @@ class Team(Base):
 class Selection(Base):
     __tablename__ = "selection"
     selection_id = Column(Integer, primary_key=True, autoincrement=True)
-    gameweek_id = Column(Integer, ForeignKey("gameweek.gameweek_id"), nullable=False)
-    outcome = Column(String, unique=False, nullable=False)
-    user_id = Column(Integer, ForeignKey("user.user_id"), nullable=False)
-    team_id = Column(Integer, ForeignKey("team.team_id"), nullable=False)
-    league_id = Column(Integer, ForeignKey("league.league_id"), nullable=False)
+    gameweek_id = Column(Integer, ForeignKey("gameweek.gameweek_id"), unique=False, nullable=False)
+    outcome = Column(String, unique=False, nullable=True)
+    user_id = Column(Integer, ForeignKey("user.user_id"), unique=False, nullable=False)
+    team_id = Column(Integer, ForeignKey("team.team_id"), unique=False,  nullable=False)
+    league_id = Column(Integer, ForeignKey("league.league_id"), unique=False, nullable=False)
 
 
 class Gameweek(Base):

@@ -4,6 +4,7 @@ import tkinter as tk
 class WelcomeScreen(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
+        self.config(background="white")
         self.controller = parent
         self.welcome_label = tk.Label(self, text="Username:")
         self.sign_in_button = tk.Button(self, text="Sign in", command=self.sign_in_clicked)
