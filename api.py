@@ -6,24 +6,45 @@ import json
 # https://fantasy.premierleague.com/api/fixtures/?event={event_id}
 # https://fantasy.premierleague.com/api/fixtures/
 
-def match_info(game_week_id):
+def api_match_info(game_week_id):
     url = f"https://fantasy.premierleague.com/api/fixtures/?event={game_week_id}"
     response = requests.get(url)
     data = response.text
     parse_json = json.loads(data)
     lis_game_week = []
-    lis = []
     for active_case in parse_json:
-        lis = [active_case['team_h'], active_case['team_h_difficulty'], active_case['team_a'], active_case['team_a_difficulty']]
+        lis = [active_case['team_h'], active_case['team_h_difficulty'], active_case['team_a'],
+               active_case['team_a_difficulty']]
         lis_game_week.append(lis)
     return lis_game_week
-
-def check_lives(starting_gameweek, user_id, league_id):
-    param = {'team_a' : 1}
+def api_check_lives(self, user_ids, league_id):
     url = "https://fantasy.premierleague.com/api/fixtures/"
+    lives = []
     response = requests.get(url)
     data = response.json()
-    print(data)
+    for user in range(len(user_ids)):
+        num_lives = 10
+        user_selections = self.get_selection(user_ids[user][0], league_id)
+        print(user_selections)
+        for team_id, gameweek_id in user_selections:
+            for match in data:
+                if match["event"] == gameweek_id and (match["team_a"] == team_id or match["team_h"] == team_id):
+                    if match["team_a"] == team_id:
+                        if match["team_a_score"] is None or match["team_h_score"] is None:
+                            break
+                        elif match["team_a_score"] == match["team_h_score"]:
+                            num_lives -= 1
+                        elif match["team_a_score"] < match["team_h_score"]:
+                            num_lives -= 2
+                    elif match["team_h"] == team_id:
+                        if match["team_a_score"] is None or match["team_h_score"] is None:
+                            break
+                        elif match["team_a_score"] == match["team_h_score"]:
+                            num_lives -= 1
+                        elif match["team_a_score"] > match["team_h_score"]:
+                            num_lives -= 2
+        lives.append(num_lives)
+    return lives
 
-
-check_lives(1)
+def api_get_match_lives(team_id, gameweek_id):
+    pass
