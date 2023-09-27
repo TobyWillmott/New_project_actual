@@ -47,12 +47,10 @@ class CreateLeague(tk.Frame):
 
     def create_button_clicked(self):
         gameweek_id = self.get_gameweek_id_final()
-        print(gameweek_id)
         self.controller.add_league(gameweek_id, self.league_name_entry.get())
         league_gameweek = self.controller.get_final_league_gameweek()
-        print(league_gameweek)
         self.controller.add_user_league(self.user_id, league_gameweek[0])
-        self.controller.show_league_selection_page(self.user_id, league_gameweek[1], gameweek_id)
+        self.controller.show_league_selection_page(self.user_id, league_gameweek[0], gameweek_id)
 
     def back_clicked(self):
         self.controller.show_home_page(self.user_id)

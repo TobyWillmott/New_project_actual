@@ -1,4 +1,6 @@
 import tkinter as tk
+from functools import partial
+
 
 class HomeScreen(tk.Frame):
     def __init__(self, parent, user_id):
@@ -17,7 +19,8 @@ class HomeScreen(tk.Frame):
         self.league_id_label = tk.Label(self, text="League ID")
         self.league_name_label = tk.Label(self, text="League Name")
         self.start_gameweek_label = tk.Label(self, text="Start Gameweek")
-        self.league_id = [tk.Label(self, text=name[0]) for name in self.user_leagues]
+        self.league_id = [tk.Button(self, text=name[0], command=partial(self.view_league_clicked, name[0])) for name in
+                          self.user_leagues]
         self.league_name = [tk.Label(self, text=name[1]) for name in self.user_leagues]
         self.start_gameweek = [tk.Label(self, text=name[2]) for name in self.user_leagues]
 
@@ -33,10 +36,9 @@ class HomeScreen(tk.Frame):
         self.league_name_label.grid(row=5, column=1)
         self.start_gameweek_label.grid(row=5, column=2)
         for i in range(len(self.league_id)):
-            self.league_id[i].grid(row=6+i, column=0)
-            self.league_name[i].grid(row=6+i, column=1)
-            self.start_gameweek[i].grid(row=6+i, column=2)
-
+            self.league_id[i].grid(row=6 + i, column=0)
+            self.league_name[i].grid(row=6 + i, column=1)
+            self.start_gameweek[i].grid(row=6 + i, column=2)
 
     def join_league_clicked(self):
         self.controller.add_user_league(self.user_id, self.join_league_var.get())
@@ -45,3 +47,6 @@ class HomeScreen(tk.Frame):
 
     def create_league_clicked(self):
         self.controller.show_create_league_page(self.user_id)
+
+    def view_league_clicked(self, league_id):
+        self.controller.show_view_league_page(self.user_id, league_id)
