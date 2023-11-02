@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from models import League, Team, User, Gameweek, UserLeague
+from models import League, Team, User, Gameweek
 from datetime import datetime
 
 teams = [Team(team_name="Arsenal"),
@@ -67,12 +67,9 @@ gameweek = [Gameweek(start_date=datetime(2023, 8, 11, 17, 30, 0)),
             Gameweek(start_date=datetime(2024, 5, 11, 12, 30, 0)),
             Gameweek(start_date=datetime(2024, 5, 19, 13, 30, 0))]
 
-
 leagues = [League(gameweek_id=1, league_name="The best league"),
            League(gameweek_id=2, league_name="Tottenham Fans")]
 
-user_leagues =[UserLeague(user_id=4, league_id=1),
-               UserLeague(user_id=2, league_id=2)]
 
 engine = create_engine("sqlite:///fantasy_football.db", echo=True)
 
@@ -81,10 +78,6 @@ with Session(engine) as sess:
     sess.add_all(teams)
     sess.add_all(leagues)
     sess.add_all(gameweek)
-    sess.add_all(user_leagues)
     sess.commit()
 
-# leagues[0].users.append(users[0])
-# leagues[0].users.append(users[2])
-# leagues[1].users.append(users[1])
-# leagues[1].users.append(users[2])
+

@@ -1,11 +1,6 @@
 import requests
 import json
 
-
-# https://fantasy.premierleague.com/api/fixtures/?event=1
-# https://fantasy.premierleague.com/api/fixtures/?event={event_id}
-# https://fantasy.premierleague.com/api/fixtures/
-
 def api_match_info(game_week_id):
     url = f"https://fantasy.premierleague.com/api/fixtures/?event={game_week_id}"
     response = requests.get(url)
@@ -17,16 +12,16 @@ def api_match_info(game_week_id):
                active_case['team_a_difficulty']]
         lis_game_week.append(lis)
     return lis_game_week
-def api_check_lives(self, user_ids, league_id):
+
+def api_check_lives(user_ids, league_id, selections):
     url = "https://fantasy.premierleague.com/api/fixtures/"
     lives = []
     response = requests.get(url)
     data = response.json()
-    for user in range(len(user_ids)):
+
+    for user in selections:
         num_lives = 10
-        user_selections = self.get_selection(user_ids[user][0], league_id)
-        print(user_selections)
-        for team_id, gameweek_id in user_selections:
+        for user_id, team_id, gameweek_id in user:
             for match in data:
                 if match["event"] == gameweek_id and (match["team_a"] == team_id or match["team_h"] == team_id):
                     if match["team_a"] == team_id:
@@ -46,5 +41,4 @@ def api_check_lives(self, user_ids, league_id):
         lives.append(num_lives)
     return lives
 
-def api_get_match_lives(team_id, gameweek_id):
-    pass
+

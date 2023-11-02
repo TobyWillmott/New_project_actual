@@ -14,7 +14,6 @@ def qry_add_user(first_name_, last_name_, username_, password_):
             sess.add(user)
             sess.commit()
 
-            return f"It worked"
 
     except ValueError as error:
         # show an error message
@@ -125,8 +124,7 @@ def qry_get_user_ids(league_id_):
     return user_ids
 
 
-def qry_get_selection(user_id_, league_id_):
+def qry_get_selection(league_id_, user_id_):
     with Session(engine) as sess:
-        selections = sess.query(Selection.team_id, Selection.gameweek_id).filter_by(user_id=user_id_,
-                                                                                    league_id=league_id_).all()
+        selections = sess.query(Selection.user_id, Selection.team_id, Selection.gameweek_id).filter_by(league_id=league_id_).all()
     return selections

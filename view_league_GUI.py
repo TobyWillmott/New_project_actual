@@ -11,6 +11,7 @@ class ViewLeague(tk.Frame):
         self.user_ids = self.controller.get_user_ids(self.league_id)
         self.user_names = self.controller.get_user_name(self.user_ids)
         self.lives = self.controller.check_lives(self.user_ids, self.league_id)
+        print("lives", self.lives)
         self.total_list = []
         for i in range(len(self.user_ids)):
             lis=[]

@@ -131,9 +131,6 @@ class TkApplication(tk.Tk):
     def get_user_ids(self, league_id_):
         return self.game.get_user_ids(league_id_)
 
-    def get_selection(self, user_id_, league_id_):
-        return self.game.get_selection(user_id_, league_id_)
-
     def check_lives(self, user_ids, league_id):
         return self.game.check_lives(user_ids, league_id)
 
