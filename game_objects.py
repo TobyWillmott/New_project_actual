@@ -1,8 +1,14 @@
 import queries as qry
 import api as api
+from sqlalchemy import create_engine
+from models import Base, User, Gameweek, League, UserLeague, Selection, Team
+from sqlalchemy.orm import Session
+
+engine = create_engine("sqlite:///fantasy_football.db", echo=True)
+Base.metadata.create_all(engine)
 
 
-class Game():
+class Game:
 
     def __init__(self):
         self.user = None
@@ -65,3 +71,15 @@ class Game():
             selection_lis.append(selection)
         print("Selection", selection_lis)
         return api.api_check_lives(user_ids, league_id, selection_lis)
+
+
+class User:
+    def __init__(self):
+        self.sess = Session(engine)
+        self.my_user = None
+
+    def set_my_user(self, user_id):
+        self.my_user = self.sess.get(User, user_id)
+
+    def remove_my_user(self):
+        self.my_user = None

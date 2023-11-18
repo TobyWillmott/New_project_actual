@@ -4,12 +4,8 @@ from sign_in_GUI import SignIn
 from create_league_GUI import CreateLeague
 import tkinter as tk
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from models import User, League, UserLeague, Gameweek, Selection, Team
 from home_screen_GUI import HomeScreen
 from select_teams_GUI import SelectTeams
-import requests
-import json
 from view_league_GUI import ViewLeague
 from game_objects import Game
 
@@ -17,20 +13,21 @@ from game_objects import Game
 class TkApplication(tk.Tk):
     def __init__(self):
         super().__init__()
-
+        self.geometry("800x400")
+        self.configure(background="#E5E5E5")
         self.game = Game()
 
         title_string = "Fantasy football"
-        self.title(title_string)
+        #self.title(title_string)
         self.resizable(False, False)
 
         self.engine = create_engine("sqlite:///fantasy_football.db", echo=True)
-        title_label = tk.Label(self,
-                               text=title_string,
-                               bg="#e7e6ed", fg="black",
-                               width=60,
-                               font=("Arial", 25))
-        title_label.pack(side=tk.TOP)
+        #title_label = tk.Label(self,
+        #                       text=title_string,
+        #                       bg="#e7e6ed", fg="black",
+        #                       width=60,
+        #                       font=("Arial", 25))
+        #title_label.pack(side=tk.TOP)
 
         self.frames = {
             "welcome_frame": WelcomeScreen(self),

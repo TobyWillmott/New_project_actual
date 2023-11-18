@@ -105,7 +105,7 @@ def qry_get_user_league_info(user_id_):
 
 def qry_id_to_team(team_id_):
     with Session(engine) as sess:
-        team_name = sess.query(Team.team_name).filter_by(team_id=team_id_).first()
+        team_name = sess.query(Team.team_abb).filter_by(team_id=team_id_).first()
     return team_name[0]
 
 
