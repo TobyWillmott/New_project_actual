@@ -6,6 +6,9 @@ class Registration(tk.Frame):
         super().__init__(parent)
         self.configure(background="#E5E5E5")
 
+        self.view_password_logo = {"view": tk.PhotoImage(file=r"images/view.png").subsample(19, 19),
+                                   "hide": tk.PhotoImage(file=r"images/hide.png").subsample(19, 19)}
+        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked)
         self.title_label = tk.Label(self,
                                     text="Welcome to football survivor",
                                     bg="#e7e6ed", fg="black",
@@ -23,44 +26,55 @@ class Registration(tk.Frame):
         self.label_password = tk.Label(self, text='Password: ', bg="#E5E5E5", fg="black")
 
         self.first_name_var = tk.StringVar()
-        self.first_name_entry = tk.Entry(self, textvariable=self.first_name_var, width=30, font=('Arial', 20), bg="white")
+        self.first_name_entry = tk.Entry(self, textvariable=self.first_name_var, width=30, fg="black", font=('Arial', 20), bg="white")
 
         self.second_name_var = tk.StringVar()
-        self.second_name_entry = tk.Entry(self, textvariable=self.second_name_var, width=30, font=('Arial', 20), bg="white")
+        self.second_name_entry = tk.Entry(self, textvariable=self.second_name_var, width=30, fg="black", font=('Arial', 20), bg="white")
 
         # username entry
         self.username_var = tk.StringVar()
-        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=30, font=('Arial', 20), bg="white")
+        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=30, fg="black", font=('Arial', 20), bg="white")
 
         # password entry
         self.password_var = tk.StringVar()
-        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=30, font=('Arial', 20), bg="white")
+        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=30, fg="black",font=('Arial', 20), bg="white", show="*")
 
         # save button
-        self.save_button = tk.Button(self, text='Save', command=self.save_button_clicked)
+        self.save_button = tk.Button(self, text='Create Account', command=self.save_button_clicked, highlightbackground="#E5E5E5", padx=123, pady=10)
 
         # message
-        self.message_label = tk.Label(self, text='', foreground='red', bg="red")
+        self.message_label = tk.Label(self, text='', foreground='red', bg="#E5E5E5")
 
-        self.back_button = tk.Button(self, text="Back", command=self.back_clicked)
+        self.back_button = tk.Button(self, text="Back", command=self.back_clicked, highlightbackground="#E5E5E5")
 
         # set the controller
 
         self.place_widgets()
 
     def place_widgets(self):
-        self.label_first_name.place(x=200, y=50)
-        self.label_second_name.place(x=200, y=130)
-        self.first_name_entry.place(x=200, y=80)
-        self.second_name_entry.place(x=200, y=160)
-        self.label_username.place(x=200, y=210)
-        self.label_password.place(x=200, y=290)
-        self.username_entry.place(x=200, y=240)
-        self.password_entry.place(x=200, y=320)
-        self.title_label.place(x=200, y=0)
-        self.save_button.place(x=200, y=380)
-        self.message_label.place(x=200, y=350)
         self.back_button.place(x=0, y=0)
+        self.title_label.place(x=200, y=0)
+        self.label_first_name.place(x=200, y=40)
+        self.first_name_entry.place(x=200, y=65)
+        self.label_second_name.place(x=200, y=110)
+        self.second_name_entry.place(x=200, y=135)
+        self.label_username.place(x=200, y=180)
+        self.username_entry.place(x=200, y=205)
+        self.label_password.place(x=200, y=250)
+        self.password_entry.place(x=200, y=275)
+        self.message_label.place(x=200, y=315)
+        self.save_button.place(x=200, y=345)
+        self.view_button.place(x=538, y=275)
+        self.view_button.lift()
+
+    def view_clicked(self):
+        if self.view_button.cget('image')==str(self.view_password_logo["view"]):
+            self.view_button.configure(image=self.view_password_logo["hide"])
+            self.password_entry.configure(show="")
+
+        elif self.view_button.cget('image') == str(self.view_password_logo["hide"]):
+            self.view_button.configure(image=self.view_password_logo["view"])
+            self.password_entry.configure(show="*")
 
     def save_button_clicked(self):
         """

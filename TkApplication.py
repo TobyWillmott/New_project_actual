@@ -27,7 +27,7 @@ class TkApplication(tk.Tk):
         #                       bg="#e7e6ed", fg="black",
         #                       width=60,
         #                       font=("Arial", 25))
-        #title_label.pack(side=tk.TOP)
+        #title_labtel.pack(side=tk.TOP)
 
         self.frames = {
             "welcome_frame": WelcomeScreen(self),
@@ -130,7 +130,8 @@ class TkApplication(tk.Tk):
 
     def check_lives(self, user_ids, league_id):
         return self.game.check_lives(user_ids, league_id)
-
+    def hash_password(self, password):
+        return self.game.hash_password(password)
 
 if __name__ == "__main__":
     app = TkApplication()

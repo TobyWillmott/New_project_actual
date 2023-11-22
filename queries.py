@@ -1,23 +1,22 @@
 from sqlalchemy import create_engine
 from models import Base, User, Gameweek, League, UserLeague, Selection, Team
 from sqlalchemy.orm import Session
+import hashlib
 
 engine = create_engine("sqlite:///fantasy_football.db", echo=True)
 Base.metadata.create_all(engine)
 
 
 def qry_add_user(first_name_, last_name_, username_, password_):
-    try:
+    hasher = hashlib.sha256()
+    hasher.update(bytes(password_, 'utf-8'))
+    hasher = hasher.hexdigest()
+    print(hasher)
+    with Session(engine) as sess:
+        user = User(first_name=first_name_, last_name=last_name_, username=username_, password=hasher)
+        sess.add(user)
+        sess.commit()
 
-        with Session(engine) as sess:
-            user = User(first_name=first_name_, last_name=last_name_, username=username_, password=password_)
-            sess.add(user)
-            sess.commit()
-
-
-    except ValueError as error:
-        # show an error message
-        raise ValueError(error)
 
 
 def qry_add_league(gameweek_id_, league_name_):

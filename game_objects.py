@@ -3,6 +3,7 @@ import api as api
 from sqlalchemy import create_engine
 from models import Base, User, Gameweek, League, UserLeague, Selection, Team
 from sqlalchemy.orm import Session
+import hashlib
 
 engine = create_engine("sqlite:///fantasy_football.db", echo=True)
 Base.metadata.create_all(engine)
@@ -71,6 +72,10 @@ class Game:
             selection_lis.append(selection)
         print("Selection", selection_lis)
         return api.api_check_lives(user_ids, league_id, selection_lis)
+    def hash_password(self, password):
+        hasher = hashlib.sha256()
+        hasher.update(bytes(password, 'utf-8'))
+        return hasher.hexdigest()
 
 
 class User:
@@ -83,3 +88,4 @@ class User:
 
     def remove_my_user(self):
         self.my_user = None
+
