@@ -22,10 +22,10 @@ class SignIn(tk.Frame):
         self.password_var = tk.StringVar()
         self.password_entry = tk.Entry(self, textvariable=self.password_var, width=32, bg="white", font=('Arial', 20),
                                        fg="black", show="*")
-        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=166, pady=12, highlightbackground="#E5E5E5", highlightcolor="red")
-        self.register_label = tk.Label(self, text="No account?", bg="#E5E5E5", fg="black" )
+        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=166, pady=12, highlightbackground="#E5E5E5", activebackground="grey", relief="flat", bg="#545354")
+        self.register_label = tk.Label(self, text="No account?", bg="#E5E5E5", fg="black", font=("Arial", 12) )
         self.register_button = tk.Button(self, text="Create one", command=self.register_clicked,
-                                         bg="#E5E5E5", fg="blue", font=('Arial', 12, 'underline'), highlightbackground="#E5E5E5")
+                                         bg="#E5E5E5", fg="blue", font=('Arial', 12, 'underline'), highlightbackground="#E5E5E5", relief="flat", padx=0, bd=0, activebackground="#E5E5E5", activeforeground="#250299")
         self.error_message = tk.Label(self, text="", fg="red", bg="#E5E5E5", font=('Arial', 17))
         self.place_widgets()
 
@@ -35,7 +35,7 @@ class SignIn(tk.Frame):
         self.username_entry.place(x=200, y=115)
         self.password_entry.place(x=200, y=200)
         self.enter_button.place(x=200, y=295)
-        self.register_label.place(x=319, y=350)
+        self.register_label.place(x=310, y=353)
         self.register_button.place(x=400, y=350)
         self.title_label.place(x=200, y=20)
         self.error_message.place(x=330, y=260)
