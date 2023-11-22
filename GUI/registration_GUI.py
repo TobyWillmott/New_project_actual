@@ -6,8 +6,8 @@ class Registration(tk.Frame):
         super().__init__(parent)
         self.configure(background="#E5E5E5")
 
-        self.view_password_logo = {"view": tk.PhotoImage(file=r"images/view.png").subsample(19, 19),
-                                   "hide": tk.PhotoImage(file=r"images/hide.png").subsample(19, 19)}
+        self.view_password_logo = {"view": tk.PhotoImage(file=r"GUI/images/view.png").subsample(19, 19),
+                                   "hide": tk.PhotoImage(file=r"GUI/images/hide.png").subsample(19, 19)}
         self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked)
         self.title_label = tk.Label(self,
                                     text="Welcome to football survivor",

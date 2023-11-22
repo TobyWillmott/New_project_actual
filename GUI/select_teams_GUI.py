@@ -1,7 +1,7 @@
 import tkinter as tk
 from functools import partial
-from models import Selection
-from PIL import Image, ImageTk
+from database.models import Selection
+
 
 class SelectTeams(tk.Frame):
     def __init__(self, parent, user_id, league_id, gameweek_id):
@@ -16,26 +16,26 @@ class SelectTeams(tk.Frame):
         self.current_gameweek_id = tk.IntVar()
         self.current_gameweek_id.set(gameweek_id)
         self.start_gameweek = gameweek_id
-        self.team_crest = {"Arsenal": tk.PhotoImage(file=r"images/Arsenal.png").subsample(2,2),
-                           "Aston Villa": tk.PhotoImage(file=r"images/Aston Villa.png").subsample(2,2),
-                           "Bournemouth": tk.PhotoImage(file=r"images/Bournemouth.png").subsample(2,2),
-                           "Brentford": tk.PhotoImage(file=r"images/Brentford.png").subsample(2,2),
-                           "Brighton & Hove Albion": tk.PhotoImage(file=r"images/Brighton & Hove Albion.png").subsample(2,2),
-                           "Burnley": tk.PhotoImage(file=r"images/Burnley.png").subsample(2,2),
-                           "Chelsea": tk.PhotoImage(file=r"images/Chelsea.png").subsample(2,2),
-                           "Crystal Palace": tk.PhotoImage(file=r"images/Crystal Palace.png").subsample(2,2),
-                           "Everton": tk.PhotoImage(file=r"images/Everton.png").subsample(2,2),
-                           "Fulham": tk.PhotoImage(file=r"images/Fulham.png").subsample(2,2),
-                           "Liverpool": tk.PhotoImage(file=r"images/Liverpool.png").subsample(2,2),
-                           "Luton Town": tk.PhotoImage(file=r"images/Luton Town.png").subsample(2,2),
-                           "Manchester City": tk.PhotoImage(file=r"images/Manchester City.png").subsample(2,2),
-                           "Manchester United": tk.PhotoImage(file=r"images/Manchester United.png").subsample(2,2),
-                           "Newcastle United": tk.PhotoImage(file=r"images/Newcastle United.png").subsample(2,2),
-                           "Nottingham Forest": tk.PhotoImage(file=r"images/Nottingham Forest.png").subsample(2,2),
-                           "Sheffield United": tk.PhotoImage(file=r"images/Sheffield United.png").subsample(2,2),
-                           "Tottenham Hotspur": tk.PhotoImage(file=r"images/Tottenham Hotspur.png").subsample(2,2),
-                           "West Ham United": tk.PhotoImage(file=r"images/West Ham United.png").subsample(2,2),
-                           "Wolverhampton Wanderers": tk.PhotoImage(file=r"images/Wolverhampton Wanderers.png").subsample(2,2),
+        self.team_crest = {"Arsenal": tk.PhotoImage(file=r"GUI/images/Arsenal.png").subsample(2, 2),
+                           "Aston Villa": tk.PhotoImage(file=r"GUI/images/Aston Villa.png").subsample(2, 2),
+                           "Bournemouth": tk.PhotoImage(file=r"GUI/images/Bournemouth.png").subsample(2, 2),
+                           "Brentford": tk.PhotoImage(file=r"GUI/images/Brentford.png").subsample(2, 2),
+                           "Brighton & Hove Albion": tk.PhotoImage(file=r"GUI/images/Brighton & Hove Albion.png").subsample(2, 2),
+                           "Burnley": tk.PhotoImage(file=r"GUI/images/Burnley.png").subsample(2, 2),
+                           "Chelsea": tk.PhotoImage(file=r"GUI/images/Chelsea.png").subsample(2, 2),
+                           "Crystal Palace": tk.PhotoImage(file=r"GUI/images/Crystal Palace.png").subsample(2, 2),
+                           "Everton": tk.PhotoImage(file=r"GUI/images/Everton.png").subsample(2, 2),
+                           "Fulham": tk.PhotoImage(file=r"GUI/images/Fulham.png").subsample(2, 2),
+                           "Liverpool": tk.PhotoImage(file=r"GUI/images/Liverpool.png").subsample(2, 2),
+                           "Luton Town": tk.PhotoImage(file=r"GUI/images/Luton Town.png").subsample(2, 2),
+                           "Manchester City": tk.PhotoImage(file=r"GUI/images/Manchester City.png").subsample(2, 2),
+                           "Manchester United": tk.PhotoImage(file=r"GUI/images/Manchester United.png").subsample(2, 2),
+                           "Newcastle United": tk.PhotoImage(file=r"GUI/images/Newcastle United.png").subsample(2, 2),
+                           "Nottingham Forest": tk.PhotoImage(file=r"GUI/images/Nottingham Forest.png").subsample(2, 2),
+                           "Sheffield United": tk.PhotoImage(file=r"GUI/images/Sheffield United.png").subsample(2, 2),
+                           "Tottenham Hotspur": tk.PhotoImage(file=r"GUI/images/Tottenham Hotspur.png").subsample(2, 2),
+                           "West Ham United": tk.PhotoImage(file=r"GUI/images/West Ham United.png").subsample(2, 2),
+                           "Wolverhampton Wanderers": tk.PhotoImage(file=r"GUI/images/Wolverhampton Wanderers.png").subsample(2, 2),
                            }
         self.teams_buttons = [
             tk.Button(self, bg="white", text=f"{name}\n", font=('Arial', 10), fg="black", image=self.team_crest[name],

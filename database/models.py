@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, Table, String, UniqueConstraint, Foreign
 from sqlalchemy.orm import relationship, declarative_base, validates
 import re
 
-# Base is called an Abstract Base Class - Our SQL Alchemy models will inherit from this class
+# Base is called an Abstract Base Class - Our SQL Alchemy models will inherit from this classes
 Base = declarative_base()
 
 

@@ -1,7 +1,7 @@
-import queries as qry
-import api as api
+from database import queries as qry
+import classes.api as api
 from sqlalchemy import create_engine
-from models import Base, User, Gameweek, League, UserLeague, Selection, Team
+from database.models import Base, User
 from sqlalchemy.orm import Session
 import hashlib
 

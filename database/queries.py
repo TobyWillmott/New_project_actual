@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from models import Base, User, Gameweek, League, UserLeague, Selection, Team
+from database.models import Base, User, Gameweek, League, UserLeague, Selection, Team
 from sqlalchemy.orm import Session
 import hashlib
 

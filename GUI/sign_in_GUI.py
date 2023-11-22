@@ -11,9 +11,9 @@ class SignIn(tk.Frame):
                                     bg="#e7e6ed", fg="black",
                                     width=0,
                                     font=("Arial", 25))
-        self.view_password_logo = {"view": tk.PhotoImage(file=r"images/view.png").subsample(19,19),
-                                   "hide": tk.PhotoImage(file=r"images/hide.png").subsample(19,19)}
-        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked)
+        self.view_password_logo = {"view": tk.PhotoImage(file=r"GUI/images/view.png").subsample(19, 19),
+                                   "hide": tk.PhotoImage(file=r"GUI/images/hide.png").subsample(19, 19)}
+        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked, bg="white", relief="flat")
         self.label_username = tk.Label(self, text="Username:", bg="#E5E5E5", fg="black")
         self.label_password = tk.Label(self, text='Password: ', bg="#E5E5E5", fg="black")
         self.username_var = tk.StringVar()
@@ -22,7 +22,7 @@ class SignIn(tk.Frame):
         self.password_var = tk.StringVar()
         self.password_entry = tk.Entry(self, textvariable=self.password_var, width=32, bg="white", font=('Arial', 20),
                                        fg="black", show="*")
-        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=166, pady=12, highlightbackground="#E5E5E5")
+        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=166, pady=12, highlightbackground="#E5E5E5", highlightcolor="red")
         self.register_label = tk.Label(self, text="No account?", bg="#E5E5E5", fg="black" )
         self.register_button = tk.Button(self, text="Create one", command=self.register_clicked,
                                          bg="#E5E5E5", fg="blue", font=('Arial', 12, 'underline'), highlightbackground="#E5E5E5")
@@ -39,7 +39,7 @@ class SignIn(tk.Frame):
         self.register_button.place(x=400, y=350)
         self.title_label.place(x=200, y=20)
         self.error_message.place(x=330, y=260)
-        self.view_button.place(x=560, y=200)
+        self.view_button.place(x=560, y=202)
         self.view_button.lift()
 
     def enter_button_clicked(self):

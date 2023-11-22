@@ -3,9 +3,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
-from game_objects import Game
-import models as m
-
+from database import models as m
 
 engine = create_engine('sqlite:///:memory:')
 

@@ -1,7 +1,6 @@
 import tkinter as tk
 from functools import partial
 
-
 class HomeScreen(tk.Frame):
     def __init__(self, parent, user_id):
         super().__init__(parent)

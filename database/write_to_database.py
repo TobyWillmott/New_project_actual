@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from models import League, Team, User, Gameweek
+from database.models import League, Team, Gameweek
 from datetime import datetime
 
 teams = [Team(team_name="Arsenal", team_abb="ARS"),

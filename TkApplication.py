@@ -1,13 +1,13 @@
-from registration_GUI import Registration
-from welcome_GUI import WelcomeScreen
-from sign_in_GUI import SignIn
-from create_league_GUI import CreateLeague
+from GUI.registration_GUI import Registration
+from GUI.welcome_GUI import WelcomeScreen
+from GUI.sign_in_GUI import SignIn
+from GUI.create_league_GUI import CreateLeague
 import tkinter as tk
 from sqlalchemy import create_engine
-from home_screen_GUI import HomeScreen
-from select_teams_GUI import SelectTeams
-from view_league_GUI import ViewLeague
-from game_objects import Game
+from GUI.home_screen_GUI import HomeScreen
+from GUI.select_teams_GUI import SelectTeams
+from GUI.view_league_GUI import ViewLeague
+from classes.game_objects import Game
 
 
 class TkApplication(tk.Tk):
