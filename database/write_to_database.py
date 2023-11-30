@@ -71,7 +71,7 @@ leagues = [League(gameweek_id=1, league_name="The best league"),
            League(gameweek_id=2, league_name="Tottenham Fans")]
 
 
-engine = create_engine("sqlite:///fantasy_football.db", echo=True)
+engine = create_engine("sqlite:///fantasy_football.sqlite", echo=True)
 
 with Session(engine) as sess:
     #sess.add_all(users)

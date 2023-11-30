@@ -3,7 +3,7 @@ from database.models import Base, User, Gameweek, League, UserLeague, Selection,
 from sqlalchemy.orm import Session
 import hashlib
 
-engine = create_engine("sqlite:///fantasy_football.db", echo=True)
+engine = create_engine("sqlite:///database/fantasy_football.sqlite", echo=True)
 Base.metadata.create_all(engine)
 
 

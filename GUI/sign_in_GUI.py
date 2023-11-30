@@ -17,12 +17,12 @@ class SignIn(tk.Frame):
         self.label_username = tk.Label(self, text="Username:", bg="#E5E5E5", fg="black")
         self.label_password = tk.Label(self, text='Password: ', bg="#E5E5E5", fg="black")
         self.username_var = tk.StringVar()
-        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=32, bg="white", font=('Arial', 20),
+        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=25, bg="white", font=('Arial', 20),
                                        fg="black")
         self.password_var = tk.StringVar()
-        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=32, bg="white", font=('Arial', 20),
+        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=25, bg="white", font=('Arial', 20),
                                        fg="black", show="*")
-        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=166, pady=12, highlightbackground="#E5E5E5", activebackground="grey", relief="flat", bg="#545354")
+        self.enter_button = tk.Button(self, text='Login', command=self.enter_button_clicked, padx=170, pady=12, highlightbackground="#E5E5E5", activebackground="#545354", relief="flat", bg="grey")
         self.register_label = tk.Label(self, text="No account?", bg="#E5E5E5", fg="black", font=("Arial", 12) )
         self.register_button = tk.Button(self, text="Create one", command=self.register_clicked,
                                          bg="#E5E5E5", fg="blue", font=('Arial', 12, 'underline'), highlightbackground="#E5E5E5", relief="flat", padx=0, bd=0, activebackground="#E5E5E5", activeforeground="#250299")
@@ -39,7 +39,7 @@ class SignIn(tk.Frame):
         self.register_button.place(x=400, y=350)
         self.title_label.place(x=200, y=20)
         self.error_message.place(x=330, y=260)
-        self.view_button.place(x=560, y=202)
+        self.view_button.place(x=542, y=202)
         self.view_button.lift()
 
     def enter_button_clicked(self):

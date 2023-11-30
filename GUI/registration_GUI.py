@@ -8,7 +8,7 @@ class Registration(tk.Frame):
 
         self.view_password_logo = {"view": tk.PhotoImage(file=r"GUI/images/view.png").subsample(19, 19),
                                    "hide": tk.PhotoImage(file=r"GUI/images/hide.png").subsample(19, 19)}
-        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked)
+        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked, relief="flat", bg="white")
         self.title_label = tk.Label(self,
                                     text="Welcome to football survivor",
                                     bg="#e7e6ed", fg="black",
@@ -26,21 +26,21 @@ class Registration(tk.Frame):
         self.label_password = tk.Label(self, text='Password: ', bg="#E5E5E5", fg="black")
 
         self.first_name_var = tk.StringVar()
-        self.first_name_entry = tk.Entry(self, textvariable=self.first_name_var, width=30, fg="black", font=('Arial', 20), bg="white")
+        self.first_name_entry = tk.Entry(self, textvariable=self.first_name_var, width=25, fg="black", font=('Arial', 20), bg="white")
 
         self.second_name_var = tk.StringVar()
-        self.second_name_entry = tk.Entry(self, textvariable=self.second_name_var, width=30, fg="black", font=('Arial', 20), bg="white")
+        self.second_name_entry = tk.Entry(self, textvariable=self.second_name_var, width=25, fg="black", font=('Arial', 20), bg="white")
 
         # username entry
         self.username_var = tk.StringVar()
-        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=30, fg="black", font=('Arial', 20), bg="white")
+        self.username_entry = tk.Entry(self, textvariable=self.username_var, width=25, fg="black", font=('Arial', 20), bg="white")
 
         # password entry
         self.password_var = tk.StringVar()
-        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=30, fg="black",font=('Arial', 20), bg="white", show="*")
+        self.password_entry = tk.Entry(self, textvariable=self.password_var, width=25, fg="black",font=('Arial', 20), bg="white", show="*")
 
         # save button
-        self.save_button = tk.Button(self, text='Create Account', command=self.save_button_clicked, highlightbackground="#E5E5E5", padx=123, pady=10)
+        self.save_button = tk.Button(self, text='Create Account', command=self.save_button_clicked, highlightbackground="#E5E5E5", padx=160, pady=10)
 
         # message
         self.message_label = tk.Label(self, text='', foreground='red', bg="#E5E5E5")
@@ -64,7 +64,7 @@ class Registration(tk.Frame):
         self.password_entry.place(x=200, y=275)
         self.message_label.place(x=200, y=315)
         self.save_button.place(x=200, y=345)
-        self.view_button.place(x=538, y=275)
+        self.view_button.place(x=538, y=277)
         self.view_button.lift()
 
     def view_clicked(self):

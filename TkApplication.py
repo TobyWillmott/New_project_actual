@@ -21,7 +21,7 @@ class TkApplication(tk.Tk):
         #self.title(title_string)
         self.resizable(False, False)
 
-        self.engine = create_engine("sqlite:///fantasy_football.db", echo=True)
+        self.engine = create_engine("sqlite:///database/fantasy_football.sqlite", echo=True)
         #title_label = tk.Label(self,
         #                       text=title_string,
         #                       bg="#e7e6ed", fg="black",
