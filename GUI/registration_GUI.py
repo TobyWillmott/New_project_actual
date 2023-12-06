@@ -6,9 +6,11 @@ class Registration(tk.Frame):
         super().__init__(parent)
         self.configure(background="#E5E5E5")
 
-        self.view_password_logo = {"view": tk.PhotoImage(file=r"GUI/images/view.png").subsample(19, 19),
-                                   "hide": tk.PhotoImage(file=r"GUI/images/hide.png").subsample(19, 19)}
-        self.view_button = tk.Button(self, image=self.view_password_logo["view"], command=self.view_clicked, relief="flat", bg="white")
+        self.images = {"view": tk.PhotoImage(file=r"GUI/images/view.png").subsample(19, 19),
+                       "hide": tk.PhotoImage(file=r"GUI/images/hide.png").subsample(19, 19),
+                       "back": tk.PhotoImage(file=r"GUI/images/back_button.png").subsample(19,19)}
+
+        self.view_button = tk.Button(self, image=self.images["view"], command=self.view_clicked, relief="flat", bg="white")
         self.title_label = tk.Label(self,
                                     text="Welcome to football survivor",
                                     bg="#e7e6ed", fg="black",
@@ -40,12 +42,12 @@ class Registration(tk.Frame):
         self.password_entry = tk.Entry(self, textvariable=self.password_var, width=25, fg="black",font=('Arial', 20), bg="white", show="*")
 
         # save button
-        self.save_button = tk.Button(self, text='Create Account', command=self.save_button_clicked, highlightbackground="#E5E5E5", padx=160, pady=10)
+        self.save_button = tk.Button(self, text='Create Account', command=self.save_button_clicked, highlightbackground="#E5E5E5", padx=144, pady=10, relief="flat")
 
         # message
         self.message_label = tk.Label(self, text='', foreground='red', bg="#E5E5E5")
 
-        self.back_button = tk.Button(self, text="Back", command=self.back_clicked, highlightbackground="#E5E5E5")
+        self.back_button = tk.Button(self, image=self.images["back"] , command=self.back_clicked, highlightbackground="#E5E5E5", relief="flat", bg="#E5E5E5")
 
         # set the controller
 
@@ -68,12 +70,12 @@ class Registration(tk.Frame):
         self.view_button.lift()
 
     def view_clicked(self):
-        if self.view_button.cget('image')==str(self.view_password_logo["view"]):
-            self.view_button.configure(image=self.view_password_logo["hide"])
+        if self.view_button.cget('image')==str(self.images["view"]):
+            self.view_button.configure(image=self.images["hide"])
             self.password_entry.configure(show="")
 
-        elif self.view_button.cget('image') == str(self.view_password_logo["hide"]):
-            self.view_button.configure(image=self.view_password_logo["view"])
+        elif self.view_button.cget('image') == str(self.images["hide"]):
+            self.view_button.configure(image=self.images["view"])
             self.password_entry.configure(show="*")
 
     def save_button_clicked(self):
