@@ -48,6 +48,7 @@ class TkApplication(tk.Tk):
         frame_to_show.pack(expand=True, fill=tk.BOTH)
 
     def show_home_page(self, user_id):
+        #self.geometry("800x800")
         widgets = self.winfo_children()
         for w in widgets:
             if w.winfo_class() == "Frame":
@@ -133,6 +134,9 @@ class TkApplication(tk.Tk):
         return self.game.check_lives(user_ids, league_id)
     def hash_password(self, password):
         return self.game.hash_password(password)
+
+    def get_games(self, user_id, league_id):
+        return self.game.get_games(user_id, league_id)
 
 if __name__ == "__main__":
     app = TkApplication()

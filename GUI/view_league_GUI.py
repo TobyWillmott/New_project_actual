@@ -43,5 +43,7 @@ class ViewLeague(tk.Frame):
             self.user_lives[i].grid(row=2+i, column=3)
 
 
+
+
     def back_clicked(self):
         self.controller.show_home_page(self.user_id)

@@ -77,6 +77,12 @@ class Game:
         hasher.update(bytes(password, 'utf-8'))
         return hasher.hexdigest()
 
+    def get_games(self, user_id, league_id):
+        user_selections = qry.qry_get_games(user_id, league_id)
+
+
+
+
 
 class User:
     def __init__(self):

@@ -41,4 +41,5 @@ def api_check_lives(user_ids, league_id, selections):
         lives.append(num_lives)
     return lives
 
-
+def get_games(gameweek, team_id):
+    ...
