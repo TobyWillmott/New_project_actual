@@ -41,5 +41,15 @@ def api_check_lives(user_ids, league_id, selections):
         lives.append(num_lives)
     return lives
 
-def get_games(gameweek, team_id):
-    ...
+def get_games(user_selections):
+    url = "https://fantasy.premierleague.com/api/fixtures/"
+    response = requests.get(url)
+    data = response.json()
+
+    for team_id, gameweek_id in user_selections:
+        for match in data:
+            if match["event"] == gameweek_id and (match["team_a"] == team_id or match["team_h"] == team_id):
+                ...
+
+
+

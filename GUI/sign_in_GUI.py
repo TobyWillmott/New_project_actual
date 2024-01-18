@@ -67,4 +67,6 @@ class SignIn(tk.Frame):
         print("not a Valid_username")
 
     def register_clicked(self):
+        self.username_var.set("")
+        self.password_var.set("")
         self.controller.show_frame("register_frame")
