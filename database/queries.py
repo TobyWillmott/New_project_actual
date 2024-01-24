@@ -130,6 +130,6 @@ def qry_get_selection(league_id_, user_id_):
 
 def qry_get_games(user_id_, league_id_):
     with Session(engine) as sess:
-        selections = sess.query(Selection.team_id, Selection.gameweek_id, Selection).filter_by(league_id=league_id_, user_id=user_id_).all()
+        selections = sess.query(Selection.team_id, Selection.gameweek_id).filter_by(league_id=league_id_, user_id=user_id_).all()
     print(selections)
     return selections

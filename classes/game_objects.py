@@ -70,7 +70,6 @@ class Game:
         for user in user_ids:
             selection = self.get_selection(league_id, user)
             selection_lis.append(selection)
-        print("Selection", selection_lis)
         return api.api_check_lives(user_ids, league_id, selection_lis)
     def hash_password(self, password):
         hasher = hashlib.sha256()
@@ -79,9 +78,31 @@ class Game:
 
     def get_games(self, user_id, league_id):
         user_selections = qry.qry_get_games(user_id, league_id)
+        games = api.get_games(user_selections)
+        for gameweek in games:
+            user_team = qry.qry_id_to_team(gameweek[1])
+            opp_team = qry.qry_id_to_team(gameweek[4])
+            user_difficulty = self.id_to_colour(gameweek[3])
+            opp_difficulty = self.id_to_colour(gameweek[6])
+            gameweek[1] = user_team
+            gameweek[4] = opp_team
+            gameweek[3] = user_difficulty
+            gameweek[6] = opp_difficulty
+        print("games: ",games)
+        return games
 
-
-
+    def id_to_colour(self, difficulty):
+        if difficulty==1:
+            colour="#2cba00"
+        elif difficulty==2:
+            colour="#a3ff00"
+        elif difficulty==3:
+            colour="#fff400"
+        elif difficulty==4:
+            colour="#ffa700"
+        elif difficulty==5:
+            colour="#ff0000"
+        return colour
 
 
 
